@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUREVANTS — Seu futuro financeiro começa aqui</title>
+<style>
+:root{
+--verde-escuro:#0B3D2E;
+--verde-medio:#14563F;
+--verde-claro:#1E6B4F;
+--dourado:#D4AF37;
+--dourado-claro:#E5C76B;
+--branco:#FFFFFF;
+--cinza-texto:#B8C4BC;
+--cinza-escuro:#0A1F18;
+--verde-ok:#25D366;
+--vermelho:#E53935;
+--aviso-vermelho:#FF5252;
+--aviso-azul:#4FC3F7;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,'Segoe UI',Roboto,sans-serif}
+body{background:#F0F5F2;color:#0B3D2E;min-height:100vh;padding-bottom:80px;overflow-x:hidden}
+.tela{display:none}.tela.ativa{display:block}
+.hidden{display:none!important}
+a{color:inherit;text-decoration:none}
+
+/* LOGIN/CADASTRO */
+.form-box{background:#FFFFFF;padding:28px 22px;border-radius:18px;margin:30px 16px;max-width:440px;border:1px solid #D8E4DD;box-shadow:0 10px 40px rgba(11,61,46,.08);position:relative;overflow:hidden}
+.form-logo{text-align:center;margin-bottom:20px}
+.form-logo img{max-width:140px;margin-bottom:10px}
+.form-logo h1{font-size:26px;font-weight:900;letter-spacing:3px;color:#0B3D2E}
+.form-logo h1 .l2{color:#D4AF37}
+.form-logo .slogan{font-size:11px;color:#5A7568;margin-top:8px;letter-spacing:.5px;font-style:italic}
+
+/* TABS LOGIN/REGISTAR */
+.tabs-login{display:flex;background:#F0F5F2;border-radius:12px;padding:4px;margin-bottom:20px}
+.tabs-login button{flex:1;padding:11px;background:transparent;border:none;font-size:13px;font-weight:800;color:#5A7568;cursor:pointer;border-radius:9px;letter-spacing:.3px}
+.tabs-login button.ativo{background:#0B3D2E;color:#FFFFFF}
+
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;color:#5A7568;margin-bottom:6px;font-weight:700;letter-spacing:.3px}
+.form-group input,.form-group select{width:100%;padding:13px 14px;border:1px solid #D8E4DD;border-radius:10px;font-size:14px;background:#F8FBF9;color:#0B3D2E;transition:border-color .2s}
+.form-group input::placeholder{color:#9CB0A5}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:#D4AF37}
+
+.btn-principal{width:100%;padding:14px;margin-top:8px;background:#0B3D2E;color:#FFFFFF;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:.5px;transition:opacity .2s}
+.btn-principal:active{opacity:.85}
+.btn-principal:disabled{opacity:.5;cursor:not-allowed}
+
+.btn-dourado{background:linear-gradient(135deg,#D4AF37,#B8952C);color:#0B3D2E}
+
+.link-troca{text-align:center;margin-top:16px;font-size:13px;color:#5A7568}
+.link-troca a{color:#D4AF37;font-weight:800;cursor:pointer}
+
+.msg{display:none;padding:11px;margin-bottom:16px;border-radius:8px;font-size:13px;text-align:center;font-weight:500}
+.msg.error{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.msg.success{background:#E8F5E9;color:#2E7D32;border:1px solid #C8E6C9}
+
+.btn-voltar{display:block;text-align:center;margin-top:16px;font-size:13px;color:#5A7568;cursor:pointer}
+
+.btn-whatsapp{background:#25D366;color:#FFFFFF;border:none;padding:14px;border-radius:10px;font-size:14px;cursor:pointer;width:100%;margin-top:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+
+.loading{text-align:center;padding:60px 20px;font-size:15px;color:#0B3D2E;font-weight:700}
+.loading .logo{font-size:44px;margin-bottom:15px}
+.loading .sub{font-size:12px;color:#5A7568;margin-top:8px;font-weight:400}/* HEADER */
+header{background:#0B3D2E;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;border-bottom:2px solid #D4AF37}
+header .brand{display:flex;align-items:center;gap:10px}
+header .brand-logo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#B8952C);color:#0B3D2E;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px}
+header h1{font-size:15px;font-weight:900;letter-spacing:1.5px;color:#FFFFFF}
+header h1 .l2{color:#D4AF37}
+header .top-actions{display:flex;gap:8px;align-items:center}
+header .top-btn{background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.4);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:#D4AF37}
+header .top-btn:active{background:rgba(212,175,55,.3)}
+
+/* CONTAINER */
+.container{padding:18px 16px;max-width:540px;margin:0 auto}
+
+/* SAUDAÇÃO */
+.saudacao{background:#0B3D2E;color:#FFFFFF;padding:16px;border-radius:16px;margin-bottom:14px}
+.saudacao .nome{font-size:14px;font-weight:700}
+.saudacao .id{font-size:11px;color:#B8C4BC;margin-top:3px}
+
+/* AVISO 620 DIAS */
+.aviso-plataforma{background:#FFF3E0;border-left:4px solid #FF5252;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;line-height:1.6}
+.aviso-plataforma .titulo{color:#D32F2F;font-weight:900;font-size:13px;margin-bottom:4px}
+.aviso-plataforma .texto{color:#1565C0}
+
+/* CARDS */
+.card{background:#FFFFFF;border-radius:16px;padding:18px;margin-bottom:14px;border:1px solid #D8E4DD;box-shadow:0 2px 8px rgba(11,61,46,.04)}
+.card-gradient{background:#0B3D2E;border:none;color:#FFFFFF}
+
+/* CARD SALDO */
+.card-saldo .label{font-size:12px;color:#B8C4BC;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+.card-saldo .valor{font-size:34px;font-weight:900;margin:8px 0 16px;color:#FFFFFF;letter-spacing:-.5px}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.stat-box{background:rgba(255,255,255,.08);border-radius:10px;padding:11px 12px;border:1px solid rgba(212,175,55,.15)}
+.stat-box .lbl{font-size:10px;color:#B8C4BC;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+.stat-box .val{font-size:15px;font-weight:800;margin-top:5px;color:#FFFFFF}
+.stat-box .val.verde{color:#25D366}
+
+/* AÇÕES GRID */
+.acoes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.acao-btn{background:#FFFFFF;padding:14px 6px;border-radius:12px;text-align:center;border:1px solid #D8E4DD;cursor:pointer;transition:all .2s}
+.acao-btn:active{background:#F0F5F2;transform:scale(.96)}
+.acao-btn .ico{font-size:22px;display:block;margin-bottom:6px;color:#0B3D2E}
+.acao-btn p{font-size:10px;color:#0B3D2E;font-weight:800;letter-spacing:.3px}
+
+/* TAREFA */
+.tarefa{display:flex;align-items:center;gap:12px;background:#FFFFFF;border-radius:14px;padding:14px;border:1px solid #D8E4DD;margin-bottom:20px}
+.tarefa .ico{width:42px;height:42px;border-radius:50%;background:#E8F5E9;color:#0B3D2E;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.tarefa .info{flex:1}
+.tarefa .info h4{font-size:13px;margin-bottom:3px;font-weight:800}
+.tarefa .info p{font-size:11px;color:#5A7568}
+.tarefa button{background:#0B3D2E;color:#D4AF37;border:none;padding:9px 14px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer}
+
+/* TÍTULOS */
+h3.section-title{font-size:15px;margin:22px 0 12px;color:#0B3D2E;font-weight:900;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+h3.section-title::before{content:'';width:4px;height:18px;background:#D4AF37;border-radius:2px}
+
+/* PLANOS */
+.plano-card{background:#FFFFFF;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #D8E4DD;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(11,61,46,.04)}
+.plano-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,#D4AF37,#B8952C)}
+.plano-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.plano-nivel{font-size:10px;color:#D4AF37;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+.plano-nome{font-size:17px;font-weight:900;margin-top:4px;color:#0B3D2E}
+.plano-valor{font-size:15px;font-weight:900;text-align:right;color:#0B3D2E}
+.plano-valor small{display:block;font-size:10px;color:#5A7568;font-weight:500;margin-top:2px}
+.plano-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.plano-stat{background:#F8FBF9;border-radius:8px;padding:9px 6px;text-align:center}
+.plano-stat .lbl{font-size:9px;color:#5A7568;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.plano-stat .val{font-size:12px;font-weight:900;margin-top:4px;color:#0B3D2E}
+.plano-stat .val.verde{color:#2E7D32}
+.plano-btn{width:100%;padding:12px;border-radius:8px;background:#0B3D2E;color:#FFFFFF;border:none;font-weight:900;font-size:13px;cursor:pointer;letter-spacing:.5px}
+.plano-btn:disabled{background:#D8E4DD;color:#9CB0A5;cursor:not-allowed}/* MENU INFERIOR */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#FFFFFF;border-top:1px solid #D8E4DD;display:flex;justify-content:space-around;padding:8px 0 10px;z-index:100;box-shadow:0 -2px 10px rgba(11,61,46,.05)}
+.nav-item{text-align:center;font-size:9px;color:#9CB0A5;cursor:pointer;flex:1;padding:4px;transition:color .2s;letter-spacing:.3px;font-weight:800}
+.nav-item .ico{font-size:20px;display:block;margin-bottom:2px}
+.nav-item.active{color:#0B3D2E}
+
+/* PERFIL */
+.perfil-header{text-align:center;padding:20px 0;margin-bottom:14px}
+.perfil-avatar{width:84px;height:84px;border-radius:50%;background:#0B3D2E;color:#D4AF37;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;margin:0 auto 12px;box-shadow:0 8px 24px rgba(11,61,46,.2)}
+.perfil-nome{font-size:20px;font-weight:900;color:#0B3D2E}
+.perfil-codigo{font-size:12px;color:#D4AF37;margin-top:6px;letter-spacing:1.5px;font-weight:800}
+.perfil-linha{display:flex;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #F0F5F2;font-size:13px}
+.perfil-linha:last-child{border-bottom:none}
+.perfil-linha .lbl{color:#5A7568;font-weight:600}
+.perfil-linha .val{font-weight:800;color:#0B3D2E}
+
+/* BOTÕES */
+.btn-full{width:100%;padding:14px;border-radius:10px;border:none;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:10px;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-verde{background:#25D366;color:#FFFFFF}
+.btn-escuro{background:#0B3D2E;color:#FFFFFF}
+.btn-dourado-full{background:linear-gradient(135deg,#D4AF37,#B8952C);color:#0B3D2E}
+.btn-vermelho{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-outline{background:transparent;color:#0B3D2E;border:1px solid #D8E4DD}
+
+/* UPLOAD */
+.upload-area{border:2px dashed #D8E4DD;border-radius:12px;padding:26px 16px;text-align:center;cursor:pointer;background:#F8FBF9;margin-top:6px}
+.upload-area .ico{font-size:28px;color:#0B3D2E;margin-bottom:8px}
+.upload-area p{font-size:12px;color:#5A7568}
+
+/* TABELAS ADMIN */
+.admin-tabela{width:100%;border-collapse:collapse;font-size:11px;background:#FFFFFF;border-radius:10px;overflow:hidden}
+.admin-tabela th,.admin-tabela td{padding:9px 7px;text-align:left;border-bottom:1px solid #F0F5F2}
+.admin-tabela th{background:#0B3D2E;color:#D4AF37;font-weight:800;text-transform:uppercase;letter-spacing:.5px;font-size:10px}
+.admin-tabela td{color:#0B3D2E}
+
+/* NOTICE */
+.notice{background:#E8F5E9;border-left:3px solid #25D366;padding:11px 13px;border-radius:6px;font-size:12px;color:#1B5E20;margin-bottom:14px;line-height:1.5}
+.notice-aviso{background:#FFF3E0;border-left-color:#FF5252;color:#C62828}
+
+/* CAIXAS DE PAGAMENTO */
+.pay-box{background:#F8FBF9;border:1px solid #D8E4DD;border-radius:10px;padding:14px;margin-bottom:10px}
+.pay-box .titulo{font-size:11px;color:#5A7568;letter-spacing:.5px;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.pay-box .valor-grande{font-size:14px;font-weight:900;color:#0B3D2E;letter-spacing:.5px;word-break:break-all}
+.pay-box .valor-copiavel{cursor:pointer;user-select:all}
+.pay-box .copiar-hint{font-size:10px;color:#D4AF37;margin-top:6px;font-weight:700}
+
+/* CARD MINI */
+.card-mini{background:#F8FBF9;border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid #D8E4DD}
+.card-mini .nome{font-weight:900;margin-bottom:4px;color:#0B3D2E;font-size:13px}
+.card-mini .info{font-size:11px;color:#5A7568;margin-bottom:3px;line-height:1.5}
+.card-mini .info b{color:#0B3D2E}
+.card-mini .acoes{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.card-mini .acoes button{flex:1;min-width:70px;padding:8px;border:none;border-radius:6px;font-weight:800;cursor:pointer;font-size:10px;letter-spacing:.3px;text-transform:uppercase}
+
+.btn-aprovar{background:#25D366;color:#FFFFFF}
+.btn-rejeitar{background:#E53935;color:#FFFFFF}
+.btn-azul{background:#1976D2;color:#FFFFFF}
+.btn-cinza{background:#5A7568;color:#FFFFFF}
+
+/* BOAS-VINDAS */
+.welcome-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#0B3D2E;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.welcome-overlay .logo{font-size:44px;margin-bottom:20px;animation:pulse 1s infinite}
+.welcome-overlay h1{font-size:24px;font-weight:900;letter-spacing:3px;margin-bottom:10px;color:#FFFFFF}
+.welcome-overlay h1 .l2{color:#D4AF37}
+.welcome-overlay p{font-size:14px;color:#B8C4BC;margin-bottom:20px}
+.welcome-overlay .nome-user{font-size:20px;font-weight:800;color:#D4AF37;margin-bottom:8px}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.8}}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:30px 20px;color:#5A7568;font-size:13px}
+.empty-state .ico{font-size:34px;margin-bottom:10px;opacity:.6}
+
+/* ESPAÇOS */
+.espaco-20{margin-top:20px}
+.espaco-12{margin-top:12px}
+.espaco-8{margin-top:8px}
+
+</style>
+</head>
+<body>
+
+<!-- ============ TELA LOADING ============ -->
+<div id="telaLoading" class="tela ativa">
+<div class="loading">
+<div class="logo">💎</div>
+AUREVANTS
+<div class="sub">A carregar...</div>
+</div>
+</div>
+
+<!-- ============ TELA BOAS-VINDAS ============ -->
+<div id="welcomeOverlay" class="welcome-overlay hidden">
+<div class="logo">💎</div>
+<h1><span class="l1">AURE</span><span class="l2">VANTS</span></h1>
+<p>Seu futuro financeiro começa aqui</p>
+<div class="nome-user" id="welcomeNome">Carregando...</div>
+<p style="font-size:11px;margin-top:14px">Preparando a sua conta...</p>
+</div>
+
+<!-- ============ TELA AUTH ============ -->
+<div id="telaAuth" class="tela">
+<div class="form-box">
+<div class="form-logo">
+<h1><span class="l1">AURE</span><span class="l2">VANTS</span></h1>
+<div class="slogan">Seu futuro financeiro começa aqui</div>
+</div>
+<div id="mensagemAuth" class="msg"></div>
+
+<div class="tabs-login">
+<button id="tabEntrar" onclick="trocarTabAuth('login')">Entrar</button>
+<button id="tabRegistar" class="ativo" onclick="trocarTabAuth('cadastro')">Registar</button>
+</div>
+
+<!-- FORM REGISTO -->
+<div id="divCadastro">
+<form id="formCadastro" autocomplete="off">
+<div class="form-group"><label>Nome completo</label><input type="text" id="r_name" placeholder="Digite seu nome completo"></div>
+<div class="form-group"><label>Telefone</label><input type="tel" id="r_tel" placeholder="9XX XXX XXX" inputmode="numeric"></div>
+<div class="form-group"><label>Palavra-passe (6 dígitos)</label><input type="password" id="r_pass" placeholder="Mínimo 6 dígitos" maxlength="6" inputmode="numeric"></div>
+<div class="form-group"><label>Confirmar palavra-passe</label><input type="password" id="r_pass2" placeholder="Repita a palavra-passe" maxlength="6" inputmode="numeric"></div>
+<div class="form-group"><label>Código de convite (opcional)</label><input type="text" id="r_code" placeholder="Código de quem te convidou"></div>
+<button type="submit" class="btn-principal" id="btnCadastro">Criar conta</button>
+</form>
+<div class="btn-voltar" onclick="trocarTabAuth('login')">← Voltar</div>
+</div>
+
+<!-- FORM LOGIN -->
+<div id="divLogin" class="hidden">
+<form id="formLogin" autocomplete="off">
+<div class="form-group"><label>Telefone</label><input type="tel" id="l_tel" placeholder="9XX XXX XXX" inputmode="numeric"></div>
+<div class="form-group"><label>Palavra-passe</label><input type="password" id="l_pass" placeholder="Sua palavra-passe" inputmode="numeric"></div>
+<button type="submit" class="btn-principal" id="btnLogin">Entrar</button>
+</form>
+<div class="btn-voltar" onclick="trocarTabAuth('cadastro')">← Voltar</div>
+</div>
+
+<a href="https://chat.whatsapp.com/CAxdT6IImeIHpBlGDpQ2TT?s=cl&p=a&mlu=4&ilr=4" target="_blank" style="text-decoration:none">
+<button type="button" class="btn-whatsapp">💬 Entrar no Grupo WhatsApp</button>
+</a>
+</div>
+</div>
+
+<!-- ============ TELA PRINCIPAL ============ -->
+<div id="telaApp" class="tela">
+<header>
+<div class="brand">
+<div class="brand-logo" id="headerLogo">A</div>
+<h1>💎 AURE<span class="l2">VANTS</span></h1>
+</div>
+<div class="top-actions">
+<div class="top-btn" onclick="abrirSuporte()" title="Suporte">💬</div>
+<div class="top-btn" onclick="abrirGrupoWA()" title="Grupo">👥</div>
+<div class="top-btn" onclick="mostrarNotificacoes()" title="Notificações">🔔</div>
+</div>
+</header>
+<div class="container" id="conteudoApp"></div>
+<div class="bottom-nav">
+<div class="nav-item active" data-tab="inicio" onclick="mudarTab('inicio')"><span class="ico">🏠</span>Início</div>
+<div class="nav-item" data-tab="investir" onclick="mudarTab('investir')"><span class="ico">📈</span>Planos</div>
+<div class="nav-item" data-tab="depositar" onclick="mudarTab('depositar')"><span class="ico">💰</span>Depositar</div>
+<div class="nav-item" data-tab="sacar" onclick="mudarTab('sacar')"><span class="ico">🏧</span>Sacar</div>
+<div class="nav-item" data-tab="equipa" onclick="mudarTab('equipa')"><span class="ico">👥</span>Equipa</div>
+<div class="nav-item" data-tab="perfil" onclick="mudarTab('perfil')"><span class="ico">👤</span>Perfil</div>
+</div>
+</div><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+/* ===== CONFIGURAÇÕES ===== */
+var NOME_PLATAFORMA = 'AUREVANTS';
+var SLOGAN = 'Seu futuro financeiro começa aqui';
+var ADMIN_TELEFONE = '933798228';
+var SUPORTE_1 = '925275588';
+var SUPORTE_2 = '933798228';
+var SITE_URL = 'https://aurevants.netlify.app';
+var PRAZO_PLATAFORMA = '620 dias';
+
+/* ===== REGRAS FINANCEIRAS ===== */
+var TAXA_SAQUE = 0.07;
+var MIN_SAQUE = 1000;
+var MIN_DEPOSITO = 5000;
+var SALDO_BOAS_VINDAS = 1000;
+var BONUS_PCT = 0.05;
+
+/* ===== HORÁRIOS ===== */
+var HORA_DEP_INICIO = 6;
+var HORA_DEP_FIM = 24;
+var HORA_SAQ_INICIO = 0;
+var HORA_SAQ_FIM = 24;
+var HORA_CREDITO_AUTO = 2;
+var MINUTO_CREDITO_AUTO = 30;
+
+/* ===== DADOS DE PAGAMENTO ===== */
+var DADOS = {
+iban: '0040 0000 83564390101 11',
+titular: 'Silvina Jamba',
+paypayEntidade: '10116',
+paypayReferencia: '935836524',
+paypayNome: 'PayPayAO',
+unitelReferencia: '925275588',
+unitelNome: 'Unitel Money'
+};
+
+/* ===== LINK GRUPO WHATSAPP ===== */
+var WHATSAPP_GRUPO = 'https://chat.whatsapp.com/CAxdT6IImeIHpBlGDpQ2TT?s=cl&p=a&mlu=4&ilr=4';
+
+/* ===== 23 PLANOS (620 DIAS) ===== */
+var PLANOS = [
+{nome:'Legacy',valor:5000,diario:700,prazo:620},
+{nome:'Sterling',valor:10000,diario:1400,prazo:620},
+{nome:'Crest',valor:15000,diario:2100,prazo:620},
+{nome:'Kensington',valor:20000,diario:2800,prazo:620},
+{nome:'Reserve',valor:25000,diario:3500,prazo:620},
+{nome:'Prestige',valor:30000,diario:4200,prazo:620},
+{nome:'Fairmont',valor:40000,diario:5600,prazo:620},
+{nome:'Kingswell',valor:50000,diario:7000,prazo:620},
+{nome:'Briarwood',valor:60000,diario:8400,prazo:620},
+{nome:'Dominion',valor:75000,diario:10500,prazo:620},
+{nome:'Crown',valor:90000,diario:12600,prazo:620},
+{nome:'Wexford',valor:100000,diario:14000,prazo:620},
+{nome:'Sterlingwood',valor:125000,diario:17500,prazo:620},
+{nome:'Oakmont',valor:150000,diario:21000,prazo:620},
+{nome:'Blackwell',valor:175000,diario:24500,prazo:620},
+{nome:'Westhaven',valor:200000,diario:28000,prazo:620},
+{nome:'Ashford',valor:250000,diario:35000,prazo:620},
+{nome:'Kingsbridge',valor:300000,diario:41000,prazo:620},
+{nome:'Prestige Platinum',valor:350000,diario:49000,prazo:620},
+{nome:'Imperial',valor:400000,diario:56000,prazo:620},
+{nome:'Heritage',valor:500000,diario:70000,prazo:620},
+{nome:'Westmoreland',valor:750000,diario:105000,prazo:620},
+{nome:'Vanderbilt',valor:1000000,diario:120000,prazo:620}
+];
+
+/* ===== FIREBASE ===== */
+var firebaseConfig = {
+apiKey: "AIzaSyAslnRdTlspaEb2d-Qd2dcd5FZoXioovM4",
+authDomain: "aurevants.firebaseapp.com",
+projectId: "aurevants",
+storageBucket: "aurevants.firebasestorage.app",
+messagingSenderId: "152737439699",
+appId: "1:152737439699:web:b5bf9a3305d35559b81926"
+};
+
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+var db = firebase.firestore();
+
+/* ===== ESTADO GLOBAL ===== */
+var usuarioAtual = null;
+var usuarios = [];
+var depositos = [];
+var saques = [];
+var configGlobal = {};
+
+/* ===== AUXILIARES ===== */
+function formatKz(v){ return (Number(v)||0).toLocaleString('pt-AO',{minimumFractionDigits:2,maximumFractionDigits:2})+' Kz'; }
+function mostrarMsg(txt,tipo){
+var el=document.getElementById('mensagemAuth');
+if(!el)return;
+el.textContent=txt;
+el.className='msg '+tipo;
+el.style.display='block';
+setTimeout(function(){el.style.display='none';},5000);
+}
+function copiar(txt){
+if(navigator.clipboard){
+navigator.clipboard.writeText(txt).then(function(){alert('✅ Copiado: '+txt);}).catch(function(){prompt('Copie:',txt);});
+}else{prompt('Copie:',txt);}
+}
+function gerarCodigo(){
+var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+var s='AV';
+for(var i=0;i<6;i++) s+=c.charAt(Math.floor(Math.random()*c.length));
+return s;
+}
+function gerarLink(cod){
+var c='abcdefghijkmnpqrstuvwxyz23456789';
+var s='';
+for(var i=0;i<10;i++) s+=c.charAt(Math.floor(Math.random()*c.length));
+return SITE_URL+'/?ref='+cod+'&l='+s;
+}
+function trocarTabAuth(t){
+document.getElementById('divCadastro').classList.toggle('hidden',t!=='cadastro');
+document.getElementById('divLogin').classList.toggle('hidden',t!=='login');
+document.getElementById('tabCadastro') && document.getElementById('tabCadastro').classList.toggle('ativo',t==='cadastro');
+document.getElementById('tabEntrar') && document.getElementById('tabEntrar').classList.toggle('ativo',t==='login');
+document.getElementById('tabRegistar') && document.getElementById('tabRegistar').classList.toggle('ativo',t==='cadastro');
+document.getElementById('mensagemAuth').style.display='none';
+}
+function mostrarTela(id){
+var ts=document.querySelectorAll('.tela');
+for(var i=0;i<ts.length;i++) ts[i].classList.remove('ativa');
+document.getElementById(id).classList.add('ativa');
+}
+function normalizarTelefone(t){
+return (t||'').replace(/\s/g,'').replace(/\+244/,'').replace(/^244/,'');
+}/* ===== CARREGAR DADOS ===== */
+function carregarUsuarios(cb){
+db.collection('usuarios').get().then(function(s){
+usuarios=[];
+s.forEach(function(d){var x=d.data();x.uid=d.id;usuarios.push(x);});
+if(cb)cb();
+}).catch(function(){if(cb)cb();});
+}
+function carregarDepositos(cb){
+db.collection('depositos').orderBy('timestamp','desc').limit(300).get().then(function(s){
+depositos=[];
+s.forEach(function(d){var x=d.data();x.docId=d.id;depositos.push(x);});
+if(cb)cb();
+}).catch(function(){if(cb)cb();});
+}
+function carregarSaques(cb){
+db.collection('saques').orderBy('timestamp','desc').limit(300).get().then(function(s){
+saques=[];
+s.forEach(function(d){var x=d.data();x.docId=d.id;saques.push(x);});
+if(cb)cb();
+}).catch(function(){if(cb)cb();});
+}
+function carregarConfig(cb){
+db.collection('config').doc('global').get().then(function(doc){
+if(doc.exists){
+configGlobal=doc.data();
+if(configGlobal.whatsappGrupo) WHATSAPP_GRUPO=configGlobal.whatsappGrupo;
+if(configGlobal.taxaSaque) TAXA_SAQUE=configGlobal.taxaSaque;
+if(configGlobal.minSaque) MIN_SAQUE=configGlobal.minSaque;
+if(configGlobal.minDeposito) MIN_DEPOSITO=configGlobal.minDeposito;
+if(configGlobal.suporte1) SUPORTE_1=configGlobal.suporte1;
+if(configGlobal.suporte2) SUPORTE_2=configGlobal.suporte2;
+}
+if(cb)cb();
+}).catch(function(){if(cb)cb();});
+}
+function carregarTudo(cb){
+carregarConfig(function(){
+carregarUsuarios(function(){
+carregarDepositos(function(){
+carregarSaques(function(){
+if(cb)cb();
+});
+});
+});
+});
+}
+
+/* ===== CADASTRO POR TELEFONE ===== */
+document.getElementById('formCadastro').addEventListener('submit',function(e){
+e.preventDefault();
+var nome=document.getElementById('r_name').value.trim();
+var tel=normalizarTelefone(document.getElementById('r_tel').value);
+var senha=document.getElementById('r_pass').value;
+var senha2=document.getElementById('r_pass2').value;
+var cod=document.getElementById('r_code').value.trim().toUpperCase();
+
+if(!nome||!tel||!senha){mostrarMsg('Preencha todos os campos.','error');return;}
+if(tel.length<9){mostrarMsg('Telefone inválido (mínimo 9 dígitos).','error');return;}
+if(senha.length!==6){mostrarMsg('Senha deve ter exatamente 6 dígitos.','error');return;}
+if(senha!==senha2){mostrarMsg('As senhas não coincidem.','error');return;}
+if(!/^\d+$/.test(senha)){mostrarMsg('Senha deve conter apenas números.','error');return;}
+
+document.getElementById('btnCadastro').disabled=true;
+document.getElementById('btnCadastro').textContent='A criar...';
+
+var emailInterno=tel+'@aurevants.app';
+
+auth.createUserWithEmailAndPassword(emailInterno,senha).then(function(cred){
+var uid=cred.user.uid;
+var codigoUnico=gerarCodigo();
+var isAdmin=(tel===ADMIN_TELEFONE);
+var dados={
+uid:uid,
+nome:nome,
+telefone:tel,
+email:emailInterno,
+codigoConvite:codigoUnico,
+linkConvite:gerarLink(codigoUnico),
+convidadoPor:cod||null,
+admin:isAdmin,
+saldo:SALDO_BOAS_VINDAS,
+totalDepositado:0,
+totalSacado:0,
+totalBonus:0,
+ganhosHoje:0,
+planosAtivos:[],
+dataRegisto:new Date().toLocaleDateString('pt-BR'),
+bloqueado:false,
+timestamp:firebase.firestore.FieldValue.serverTimestamp()
+};
+return db.collection('usuarios').doc(uid).set(dados);
+}).then(function(){
+mostrarMsg('Conta criada! Faça login.','success');
+document.getElementById('formCadastro').reset();
+document.getElementById('l_tel').value=tel;
+document.getElementById('btnCadastro').disabled=false;
+document.getElementById('btnCadastro').textContent='Criar conta';
+setTimeout(function(){trocarTabAuth('login');},1800);
+}).catch(function(err){
+document.getElementById('btnCadastro').disabled=false;
+document.getElementById('btnCadastro').textContent='Criar conta';
+var m='Erro ao criar conta.';
+if(err.code==='auth/email-already-in-use') m='Este telefone já está cadastrado.';
+else if(err.code==='auth/weak-password') m='Senha muito fraca.';
+mostrarMsg(m,'error');
+});
+});
+
+/* ===== LOGIN POR TELEFONE ===== */
+document.getElementById('formLogin').addEventListener('submit',function(e){
+e.preventDefault();
+var tel=normalizarTelefone(document.getElementById('l_tel').value);
+var senha=document.getElementById('l_pass').value;
+if(!tel||!senha){mostrarMsg('Preencha telefone e senha.','error');return;}
+if(senha.length!==6){mostrarMsg('Senha deve ter 6 dígitos.','error');return;}
+
+var emailInterno=tel+'@aurevants.app';
+
+document.getElementById('btnLogin').disabled=true;
+document.getElementById('btnLogin').textContent='A entrar...';
+
+auth.signInWithEmailAndPassword(emailInterno,senha).then(function(cred){
+return db.collection('usuarios').doc(cred.user.uid).get();
+}).then(function(doc){
+if(!doc.exists){
+mostrarMsg('Perfil não encontrado.','error');
+auth.signOut();
+document.getElementById('btnLogin').disabled=false;
+document.getElementById('btnLogin').textContent='Entrar';
+return;
+}
+var d=doc.data();
+d.uid=doc.id;
+if(d.bloqueado){
+mostrarMsg('Conta bloqueada. Contacte o suporte.','error');
+auth.signOut();
+document.getElementById('btnLogin').disabled=false;
+document.getElementById('btnLogin').textContent='Entrar';
+return;
+}
+usuarioAtual=d;
+document.getElementById('btnLogin').disabled=false;
+document.getElementById('btnLogin').textContent='Entrar';
+abrirApp();
+}).catch(function(err){
+document.getElementById('btnLogin').disabled=false;
+document.getElementById('btnLogin').textContent='Entrar';
+var m='Telefone ou senha incorretos.';
+if(err.code==='auth/wrong-password') m='Senha incorreta.';
+else if(err.code==='auth/user-not-found') m='Telefone não cadastrado.';
+mostrarMsg(m,'error');
+});
+});/* ===== 💰 CRÉDITO AUTOMÁTICO DE RENDAS ===== */
+function creditarRendasPendentes(u){
+if(!u||!u.planosAtivos||u.planosAtivos.length===0) return Promise.resolve(0);
+
+var agora = Date.now();
+var totalCreditado = 0;
+var planosAtualizados = [];
+var algumAlterado = false;
+
+u.planosAtivos.forEach(function(p){
+var ultimoCredito = p.ultimoCredito || p.dataInicio_timestamp || (agora - 24*60*60*1000);
+var diff = agora - ultimoCredito;
+var dias = Math.floor(diff / (24*60*60*1000));
+
+if(dias > 0){
+var ganho = p.diario * dias;
+totalCreditado += ganho;
+p.ganhoTotal = (p.ganhoTotal || 0) + ganho;
+p.ultimoCredito = agora;
+algumAlterado = true;
+}
+planosAtualizados.push(p);
+});
+
+if(!algumAlterado) return Promise.resolve(0);
+
+var novoSaldo = u.saldo + totalCreditado;
+var novoGanhosHoje = (u.ganhosHoje || 0) + totalCreditado;
+
+return db.collection('usuarios').doc(u.uid).update({
+saldo: novoSaldo,
+ganhosHoje: novoGanhosHoje,
+planosAtivos: planosAtualizados,
+ultimoCreditoGlobal: agora
+}).then(function(){
+usuarioAtual.saldo = novoSaldo;
+usuarioAtual.ganhosHoje = novoGanhosHoje;
+usuarioAtual.planosAtivos = planosAtualizados;
+return totalCreditado;
+});
+}
+
+/* ===== ABRIR APP COM BOAS-VINDAS 3s ===== */
+function abrirApp(){
+document.getElementById('headerLogo').textContent=usuarioAtual.nome.charAt(0).toUpperCase();
+document.getElementById('welcomeNome').textContent=usuarioAtual.nome;
+document.getElementById('welcomeOverlay').classList.remove('hidden');
+mostrarTela('telaApp');
+
+setTimeout(function(){
+document.getElementById('welcomeOverlay').classList.add('hidden');
+carregarTudo(function(){
+creditarRendasPendentes(usuarioAtual).then(function(total){
+if(total > 0){
+setTimeout(function(){
+alert('💰 Renda creditada automaticamente!\n\nValor: '+formatKz(total)+'\n\nBem-vindo de volta!');
+}, 300);
+}
+mudarTab('inicio');
+});
+});
+},3000);
+}
+
+function sair(){
+if(!confirm('Terminar sessão?'))return;
+auth.signOut().then(function(){
+usuarioAtual=null;
+usuarios=[];
+depositos=[];
+saques=[];
+mostrarTela('telaAuth');
+document.getElementById('formLogin').reset();
+document.getElementById('formCadastro').reset();
+});
+}
+
+function mudarTab(t){
+var items=document.querySelectorAll('.nav-item');
+for(var i=0;i<items.length;i++){
+items[i].classList.toggle('active',items[i].getAttribute('data-tab')===t);
+}
+var c=document.getElementById('conteudoApp');
+if(t==='inicio') c.innerHTML=renderInicio();
+else if(t==='investir') c.innerHTML=renderInvestir();
+else if(t==='depositar') c.innerHTML=renderDepositar();
+else if(t==='sacar') c.innerHTML=renderSacar();
+else if(t==='equipa') c.innerHTML=renderEquipa();
+else if(t==='perfil') c.innerHTML=renderPerfil();
+window.scrollTo(0,0);
+}
+
+/* ===== SUPORTE + GRUPO WHATSAPP ===== */
+function abrirSuporte(){
+var msg='Olá! Preciso de suporte na AUREVANTS.';
+var url='https://wa.me/244'+SUPORTE_1+'?text='+encodeURIComponent(msg);
+window.open(url,'_blank');
+}
+
+function abrirGrupoWA(){
+window.open(WHATSAPP_GRUPO,'_blank');
+}
+
+function mostrarNotificacoes(){
+var u=usuarioAtual;
+if(!u)return;
+var conv=usuarios.filter(function(x){return x.convidadoPor===u.codigoConvite;}).length;
+var planos=u.planosAtivos?u.planosAtivos.length:0;
+alert('🔔 Notificações\n\n💰 Saldo: '+formatKz(u.saldo)+'\n📈 Planos ativos: '+planos+'\n👥 Convidados: '+conv);
+}
+
+/* ===== RENDER INÍCIO ===== */
+function renderInicio(){
+var u=usuarioAtual;
+var planos=u.planosAtivos||[];
+var h='';
+
+/* Saudação */
+h+='<div class="saudacao">';
+h+='<div class="nome">💎 Olá, '+u.nome+'</div>';
+h+='<div class="id">ID: '+u.codigoConvite+'</div>';
+h+='</div>';
+
+/* Aviso 620 dias */
+h+='<div class="aviso-plataforma">';
+h+='<div class="titulo">⚠️ ATENÇÃO</div>';
+h+='<div class="texto">A plataforma de investimentos tem o contrato válido apenas de <b>'+PRAZO_PLATAFORMA+'</b>, desfruta das opções da empresa.</div>';
+h+='</div>';
+
+/* Card Saldo */
+h+='<div class="card card-gradient card-saldo">';
+h+='<div class="label">Saldo disponível</div>';
+h+='<div class="valor">'+formatKz(u.saldo)+'</div>';
+h+='<div class="stats-grid">';
+h+='<div class="stat-box"><div class="lbl">Ganhos de Hoje</div><div class="val verde">'+formatKz(u.ganhosHoje||0)+'</div></div>';
+h+='<div class="stat-box"><div class="lbl">Total Bónus</div><div class="val">'+formatKz(u.totalBonus||0)+'</div></div>';
+h+='<div class="stat-box"><div class="lbl">Total Depositado</div><div class="val">'+formatKz(u.totalDepositado||0)+'</div></div>';
+h+='<div class="stat-box"><div class="lbl">Total Sacado</div><div class="val">'+formatKz(u.totalSacado||0)+'</div></div>';
+h+='</div></div>';
+
+/* Tarefa */
+h+='<div class="tarefa">';
+h+='<div class="ico">⏱️</div>';
+h+='<div class="info"><h4>Tarefa diária</h4>';
+h+='<p>'+(planos.length>0?'Planos ativos: '+planos.length:'Ative um plano para começar.')+'</p></div>';
+h+='<button onclick="mudarTab(\'investir\')">'+(planos.length>0?'Ver':'Investir')+'</button>';
+h+='</div>';
+
+/* Ações grid */
+h+='<div class="acoes-grid">';
+h+='<div class="acao-btn" onclick="mudarTab(\'investir\')"><span class="ico">📈</span><p>Planos</p></div>';
+h+='<div class="acao-btn" onclick="mudarTab(\'depositar\')"><span class="ico">💰</span><p>Depositar</p></div>';
+h+='<div class="acao-btn" onclick="mudarTab(\'sacar\')"><span class="ico">🏧</span><p>Sacar</p></div>';
+h+='<div class="acao-btn" onclick="mudarTab(\'equipa\')"><span class="ico">👥</span><p>Equipa</p></div>';
+h+='<div class="acao-btn" onclick="mudarTab(\'perfil\')"><span class="ico">🎁</span><p>Bónus</p></div>';
+h+='<div class="acao-btn" onclick="abrirSuporte()"><span class="ico">💬</span><p>Suporte</p></div>';
+h+='<div class="acao-btn" onclick="abrirGrupoWA()"><span class="ico">👥</span><p>Grupo</p></div>';
+h+='<div class="acao-btn" onclick="verHistorico()"><span class="ico">📋</span><p>Histórico</p></div>';
+h+='</div>';
+
+if(u.admin) h+=renderAdmin();
+return h;
+}
+
+function verHistorico(){
+var u=usuarioAtual;
+var deps=depositos.filter(function(d){return d.userId===u.uid;});
+var saqs=saques.filter(function(s){return s.userId===u.uid;});
+var t='📋 Histórico\n\n';
+if(deps.length===0&&saqs.length===0) t+='Nenhuma transação.';
+deps.forEach(function(d){t+='💰 Depósito: '+formatKz(d.valor)+' — '+d.status+' ('+d.data+')\n';});
+saqs.forEach(function(s){t+='🏧 Saque: '+formatKz(s.valor)+' — '+s.status+' ('+s.data+')\n';});
+alert(t);
+  }/* ===== PAINEL ADMINISTRADOR ===== */
+function renderAdmin(){
+var pendDep=depositos.filter(function(d){return d.status==='pendente';});
+var pendSaq=saques.filter(function(s){return s.status==='pendente';});
+var totalDep=0,totalSaq=0;
+depositos.forEach(function(d){if(d.status==='aprovado')totalDep+=d.valor;});
+saques.forEach(function(s){if(s.status==='pago')totalSaq+=s.valor;});
+
+var h='<h3 class="section-title">👑 Painel Administrador</h3>';
+h+='<div class="notice">Controle total da plataforma. Apenas o administrador vê esta área.</div>';
+
+/* Estatísticas */
+h+='<div class="card"><div class="stats-grid">';
+h+='<div class="stat-box" style="background:#F0F5F2"><div class="lbl" style="color:#5A7568">Usuários</div><div class="val" style="color:#0B3D2E;font-size:22px">'+usuarios.length+'</div></div>';
+h+='<div class="stat-box" style="background:#F0F5F2"><div class="lbl" style="color:#5A7568">Dep. Pendentes</div><div class="val" style="color:#D32F2F;font-size:22px">'+pendDep.length+'</div></div>';
+h+='<div class="stat-box" style="background:#F0F5F2"><div class="lbl" style="color:#5A7568">Saq. Pendentes</div><div class="val" style="color:#D32F2F;font-size:22px">'+pendSaq.length+'</div></div>';
+h+='<div class="stat-box" style="background:#F0F5F2"><div class="lbl" style="color:#5A7568">Total Dep.</div><div class="val" style="color:#2E7D32;font-size:14px">'+formatKz(totalDep)+'</div></div>';
+h+='</div></div>';
+
+/* Botões de configuração */
+h+='<div class="card">';
+h+='<h4 style="color:#0B3D2E;margin-bottom:10px;font-size:13px;font-weight:900">⚙️ CONFIGURAÇÕES DA PLATAFORMA</h4>';
+h+='<button class="btn-full btn-dourado-full" onclick="admCreditarTodos()" style="margin-bottom:8px">💰 Creditar Rendas (Todos)</button>';
+h+='<button class="btn-full btn-outline" onclick="abrirConfigAdmin()">🔧 Editar Configurações</button>';
+h+='</div>';
+
+/* Pesquisar usuário */
+h+='<div class="card"><h4 style="color:#0B3D2E;margin-bottom:10px;font-size:13px;font-weight:900">🔍 PESQUISAR USUÁRIO</h4>';
+h+='<div class="form-group"><input type="text" id="adm_busca" placeholder="Nome, telefone, e-mail ou código" oninput="filtrarUsuarios()"></div>';
+h+='<div id="adm_resultado"></div></div>';
+
+/* Ajustar saldo */
+h+='<div class="card"><h4 style="color:#0B3D2E;margin-bottom:10px;font-size:13px;font-weight:900">💰 AJUSTAR SALDO</h4>';
+h+='<div class="form-group"><select id="adm_user"><option value="">-- Selecione um usuário --</option>';
+usuarios.forEach(function(x){
+h+='<option value="'+x.uid+'">'+x.nome+' ('+x.telefone+') — '+formatKz(x.saldo)+'</option>';
+});
+h+='</select></div>';
+h+='<div class="form-group"><input type="number" id="adm_valor" placeholder="Ex: 5000 ou -2000"></div>';
+h+='<button class="btn-full btn-dourado-full" onclick="admAjustarSaldo()">Aplicar Ajuste</button></div>';
+
+/* Depósitos pendentes */
+h+='<h3 class="section-title">💳 Depósitos Pendentes ('+pendDep.length+')</h3>';
+if(pendDep.length===0) h+='<div class="empty-state"><div class="ico">📭</div>Nenhum depósito pendente.</div>';
+pendDep.forEach(function(d){
+h+='<div class="card-mini">';
+h+='<div class="nome">'+d.userNome+'</div>';
+h+='<div class="info">📱 Telefone: <b>'+d.userTelefone+'</b></div>';
+h+='<div class="info">💰 Valor: <b style="color:#2E7D32">'+formatKz(d.valor)+'</b></div>';
+h+='<div class="info">🏦 Conta: '+d.conta+'</div>';
+h+='<div class="info">📅 '+d.data+'</div>';
+if(d.comprovativo) h+='<img src="'+d.comprovativo+'" style="width:100%;border-radius:8px;margin-top:8px;max-height:250px;object-fit:contain;background:#fff">';
+h+='<div class="acoes">';
+h+='<button class="btn-aprovar" onclick="admAprovarDep(\''+d.docId+'\')">✅ Aprovar</button>';
+h+='<button class="btn-rejeitar" onclick="admRejeitarDep(\''+d.docId+'\')">❌ Rejeitar</button>';
+h+='</div></div>';
+});
+
+/* Saques pendentes */
+h+='<h3 class="section-title">🏧 Saques Pendentes ('+pendSaq.length+')</h3>';
+if(pendSaq.length===0) h+='<div class="empty-state"><div class="ico">📭</div>Nenhum saque pendente.</div>';
+pendSaq.forEach(function(s){
+h+='<div class="card-mini">';
+h+='<div class="nome">'+s.userNome+'</div>';
+h+='<div class="info">📱 Telefone: <b>'+s.userTelefone+'</b></div>';
+h+='<div class="info">💰 Bruto: <b>'+formatKz(s.valor)+'</b> · Líquido: '+formatKz(s.liquido)+'</div>';
+h+='<div class="info">📤 Método: '+s.metodo+'</div>';
+h+='<div class="info">🏦 Destino: '+s.conta+'</div>';
+h+='<div class="info">📅 '+s.data+'</div>';
+h+='<div class="acoes">';
+h+='<button class="btn-aprovar" onclick="admAprovarSaq(\''+s.docId+'\')">✅ Pago</button>';
+h+='<button class="btn-rejeitar" onclick="admRejeitarSaq(\''+s.docId+'\')">❌ Rejeitar</button>';
+h+='</div></div>';
+});
+
+return h;
+}
+
+/* ===== AÇÕES ADMIN ===== */
+function filtrarUsuarios(){
+var q=document.getElementById('adm_busca').value.toLowerCase().trim();
+var el=document.getElementById('adm_resultado');
+if(!q){el.innerHTML='';return;}
+var res=usuarios.filter(function(x){
+return (x.nome||'').toLowerCase().indexOf(q)>-1 ||
+(x.telefone||'').indexOf(q)>-1 ||
+(x.email||'').toLowerCase().indexOf(q)>-1 ||
+(x.codigoConvite||'').toLowerCase().indexOf(q)>-1;
+});
+if(res.length===0){el.innerHTML='<div class="empty-state">Nenhum resultado.</div>';return;}
+var h='';
+res.forEach(function(x){
+h+='<div class="card-mini">';
+h+='<div class="nome">'+x.nome+'</div>';
+h+='<div class="info">📱 Telefone: <b>'+x.telefone+'</b></div>';
+h+='<div class="info">💰 Saldo: <b>'+formatKz(x.saldo)+'</b></div>';
+h+='<div class="info">🎁 Código: '+x.codigoConvite+'</div>';
+h+='<div class="info">👤 Convidado por: '+(x.convidadoPor||'—')+'</div>';
+h+='<div class="info">📅 Registo: '+x.dataRegisto+'</div>';
+h+='<div class="info">📈 Planos: '+(x.planosAtivos?x.planosAtivos.length:0)+'</div>';
+h+='<div class="info">🔒 Bloqueado: '+(x.bloqueado?'Sim':'Não')+'</div>';
+h+='<div class="acoes">';
+h+='<button class="btn-azul" onclick="admVerDetalhes(\''+x.uid+'\')">👁️ Ver</button>';
+h+='<button class="btn-azul" onclick="admRedefinirSenha(\''+x.uid+'\')">🔑 Senha</button>';
+h+='<button class="btn-cinza" onclick="admAcessarConta(\''+x.uid+'\')">🔓 Acessar</button>';
+h+='<button class="btn-cinza" onclick="admToggleBlock(\''+x.uid+'\')">'+(x.bloqueado?'🔓':'🔒')+'</button>';
+h+='<button class="btn-rejeitar" onclick="admEliminar(\''+x.uid+'\')">🗑️</button>';
+h+='</div></div>';
+});
+el.innerHTML=h;
+}
+
+function admVerDetalhes(uid){
+var u=usuarios.filter(function(x){return x.uid===uid;})[0];
+if(!u)return;
+var deps=depositos.filter(function(d){return d.userId===uid;});
+var saqs=saques.filter(function(s){return s.userId===uid;});
+var conv=usuarios.filter(function(x){return x.convidadoPor===u.codigoConvite;});
+var totalDep=0,totalSaq=0;
+deps.forEach(function(d){if(d.status==='aprovado')totalDep+=d.valor;});
+saqs.forEach(function(s){if(s.status==='pago')totalSaq+=s.valor;});
+
+var txt='👤 DETALHES DO USUÁRIO\n\n';
+txt+='📛 Nome: '+u.nome+'\n';
+txt+='📱 Telefone: '+u.telefone+'\n';
+txt+='💰 Saldo: '+formatKz(u.saldo)+'\n';
+txt+='🎁 Código: '+u.codigoConvite+'\n';
+txt+='👤 Convidado por: '+(u.convidadoPor||'—')+'\n';
+txt+='📅 Registo: '+u.dataRegisto+'\n';
+txt+='🔒 Bloqueado: '+(u.bloqueado?'Sim':'Não')+'\n\n';
+txt+='📥 Dep. total: '+formatKz(totalDep)+'\n';
+txt+='📤 Saq. total: '+formatKz(totalSaq)+'\n';
+txt+='🎁 Bónus: '+formatKz(u.totalBonus||0)+'\n';
+txt+='📈 Planos ativos: '+(u.planosAtivos?u.planosAtivos.length:0)+'\n';
+txt+='👥 Convidados: '+conv.length+'\n\n';
+txt+='📋 Transações: '+(deps.length+saqs.length);
+alert(txt);
+}
+
+function admRedefinirSenha(uid){
+var u=usuarios.filter(function(x){return x.uid===uid;})[0];
+if(!u)return;
+var nova=prompt('Nova senha para '+u.nome+' (6 dígitos):');
+if(!nova||nova.length!==6){alert('Senha deve ter 6 dígitos.');return;}
+db.collection('usuarios').doc(uid).update({senhaResetada:nova,senhaResetadaEm:new Date().toLocaleString('pt-BR')}).then(function(){
+alert('✅ Nova senha registada: '+nova+'\n\nPasse ao usuário para ele entrar.');
+});
+}
+
+function admAcessarConta(uid){
+var u=usuarios.filter(function(x){return x.uid===uid;})[0];
+if(!u)return;
+var nova=prompt('Para ACESSAR a conta de '+u.nome+':\n\nDigite a senha temporária (6 dígitos) para ele entrar:');
+if(!nova||nova.length!==6){alert('Operação cancelada.');return;}
+db.collection('usuarios').doc(uid).update({senhaResetada:nova,senhaResetadaEm:new Date().toLocaleString('pt-BR')}).then(function(){
+alert('✅ Senha temporária definida: '+nova+'\n\nO usuário pode entrar com essa senha.');
+});
+}
+
+function admToggleBlock(uid){
+var u=usuarios.filter(function(x){return x.uid===uid;})[0];
+if(!u)return;
+var novo=!u.bloqueado;
+db.collection('usuarios').doc(uid).update({bloqueado:novo}).then(function(){
+alert(novo?'🔒 Usuário bloqueado.':'🔓 Usuário desbloqueado.');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admEliminar(uid){
+if(!confirm('⚠️ Eliminar usuário permanentemente?\nEsta ação não pode ser desfeita.'))return;
+db.collection('usuarios').doc(uid).delete().then(function(){
+alert('✅ Usuário eliminado.');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admAjustarSaldo(){
+var uid=document.getElementById('adm_user').value;
+var v=parseFloat(document.getElementById('adm_valor').value);
+if(!uid||isNaN(v)||v===0){alert('Preencha os dados.');return;}
+var u=usuarios.filter(function(x){return x.uid===uid;})[0];
+if(!u)return;
+var novo=u.saldo+v;
+if(novo<0){alert('Saldo negativo não permitido.');return;}
+db.collection('usuarios').doc(uid).update({saldo:novo}).then(function(){
+alert('✅ Novo saldo: '+formatKz(novo));
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admAprovarDep(docId){
+var d=depositos.filter(function(x){return x.docId===docId;})[0];
+if(!d||d.status!=='pendente')return;
+var u=usuarios.filter(function(x){return x.uid===d.userId;})[0];
+if(!u)return;
+var novoSaldo=u.saldo+d.valor;
+var novoTotal=(u.totalDepositado||0)+d.valor;
+db.collection('usuarios').doc(d.userId).update({saldo:novoSaldo,totalDepositado:novoTotal}).then(function(){
+return db.collection('depositos').doc(docId).update({status:'aprovado',dataAprovacao:new Date().toLocaleString('pt-BR')});
+}).then(function(){
+if(u.convidadoPor){
+db.collection('usuarios').where('codigoConvite','==',u.convidadoPor).get().then(function(s){
+if(s.size>0){
+var patr=s.docs[0].data();
+var bonus=d.valor*BONUS_PCT;
+var novoBonus=(patr.totalBonus||0)+bonus;
+var novoSaldoPatr=(patr.saldo||0)+bonus;
+db.collection('usuarios').doc(s.docs[0].id).update({totalBonus:novoBonus,saldo:novoSaldoPatr});
+}
+}).catch(function(){});
+}
+alert('✅ Depósito aprovado!');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admRejeitarDep(docId){
+db.collection('depositos').doc(docId).update({status:'rejeitado'}).then(function(){
+alert('Depósito rejeitado.');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admAprovarSaq(docId){
+db.collection('saques').doc(docId).update({status:'pago',dataPagamento:new Date().toLocaleString('pt-BR')}).then(function(){
+alert('✅ Saque marcado como pago!');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admRejeitarSaq(docId){
+var s=saques.filter(function(x){return x.docId===docId;})[0];
+if(!s)return;
+var u=usuarios.filter(function(x){return x.uid===s.userId;})[0];
+if(!u)return;
+var novoSaldo=u.saldo+s.valor;
+db.collection('usuarios').doc(s.userId).update({saldo:novoSaldo}).then(function(){
+return db.collection('saques').doc(docId).update({status:'rejeitado'});
+}).then(function(){
+alert('Saque rejeitado. Valor devolvido.');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+function admCreditarTodos(){
+if(!confirm('Creditar rendas diárias para TODOS os usuários com planos ativos?'))return;
+var totalGeral=0,contador=0;
+var promises=usuarios.map(function(u){
+if(!u.planosAtivos||u.planosAtivos.length===0) return Promise.resolve();
+return creditarRendasPendentes(u).then(function(v){
+if(v>0){totalGeral+=v;contador++;}
+});
+});
+Promise.all(promises).then(function(){
+alert('✅ Créditos processados!\n\nUsuários afetados: '+contador+'\nTotal creditado: '+formatKz(totalGeral));
+carregarTudo(function(){mudarTab('inicio');});
+});
+}/* ===== INVESTIR (SEM LIMITE, MAS NÃO REPETE O MESMO) ===== */
+function renderInvestir(){
+var u=usuarioAtual;
+var h='<h3 class="section-title">📈 Planos de Investimento</h3>';
+h+='<div class="card card-gradient" style="margin-bottom:16px">';
+h+='<div class="label" style="font-size:12px;color:#B8C4BC;text-transform:uppercase;font-weight:700">Saldo disponível</div>';
+h+='<div style="font-size:28px;font-weight:900;margin-top:6px">'+formatKz(u.saldo)+'</div></div>';
+h+='<div class="notice">💡 Pode investir em vários planos diferentes, sem limites. Cada plano só pode ser adquirido <b>1 vez</b>.</div>';
+
+/* Planos ativos */
+var planos=u.planosAtivos||[];
+if(planos.length>0){
+h+='<h3 class="section-title">💼 Meus Planos Ativos ('+planos.length+')</h3>';
+planos.forEach(function(p,idx){
+h+='<div class="plano-card">';
+h+='<div class="plano-header"><div><div class="plano-nivel" style="color:#2E7D32">ATIVO</div><div class="plano-nome">'+p.nome+'</div></div>';
+h+='<div class="plano-valor" style="color:#2E7D32">'+formatKz(p.valor)+'</div></div>';
+h+='<div class="plano-stats">';
+h+='<div class="plano-stat"><div class="lbl">Diário</div><div class="val verde">'+formatKz(p.diario)+'</div></div>';
+h+='<div class="plano-stat"><div class="lbl">Prazo</div><div class="val">'+p.prazo+'d</div></div>';
+h+='<div class="plano-stat"><div class="lbl">Ganho Total</div><div class="val">'+formatKz(p.ganhoTotal||0)+'</div></div>';
+h+='</div></div>';
+});
+}
+
+/* Todos os planos */
+h+='<h3 class="section-title">💼 Todos os Planos</h3>';
+PLANOS.forEach(function(p){
+var jaTem=planos.some(function(x){return x.nome===p.nome;});
+var pode=u.saldo>=p.valor && !jaTem;
+var totalPrevisto=p.diario*p.prazo;
+h+='<div class="plano-card">';
+h+='<div class="plano-header"><div><div class="plano-nivel">620 DIAS</div><div class="plano-nome">'+p.nome+'</div></div>';
+h+='<div class="plano-valor">'+formatKz(p.valor)+'<small>Investimento</small></div></div>';
+h+='<div class="plano-stats">';
+h+='<div class="plano-stat"><div class="lbl">Diário</div><div class="val verde">'+formatKz(p.diario)+'</div></div>';
+h+='<div class="plano-stat"><div class="lbl">Prazo</div><div class="val">620 dias</div></div>';
+h+='<div class="plano-stat"><div class="lbl">Total</div><div class="val">'+formatKz(totalPrevisto)+'</div></div>';
+h+='</div>';
+var btnTxt, btnDis;
+if(jaTem){btnTxt='✅ Já investido';btnDis='disabled';}
+else if(u.saldo<p.valor){btnTxt='Saldo insuficiente';btnDis='disabled';}
+else{btnTxt='Investir Agora';btnDis='';}
+h+='<button class="plano-btn" '+btnDis+' onclick="investir(\''+p.nome+'\','+p.valor+','+p.diario+','+p.prazo+')">'+btnTxt+'</button>';
+h+='</div>';
+});
+return h;
+}
+
+function investir(nome,valor,diario,prazo){
+var u=usuarioAtual;
+if(u.saldo<valor){alert('Saldo insuficiente.');return;}
+var planos=u.planosAtivos||[];
+if(planos.some(function(x){return x.nome===nome;})){alert('Você já tem este plano ativo.');return;}
+if(!confirm('Confirmar investimento?\n\nPlano: '+nome+'\nValor: '+formatKz(valor)+'\nDiário: '+formatKz(diario)+'\nPrazo: '+prazo+' dias'))return;
+
+var agora=Date.now();
+planos.push({
+nome:nome,
+valor:valor,
+diario:diario,
+prazo:prazo,
+dataInicio:new Date().toLocaleDateString('pt-BR'),
+dataInicio_timestamp:agora,
+ultimoCredito:agora,
+ganhoTotal:0,
+id:agora
+});
+
+var novoSaldo=u.saldo-valor;
+db.collection('usuarios').doc(u.uid).update({saldo:novoSaldo,planosAtivos:planos}).then(function(){
+usuarioAtual.saldo=novoSaldo;
+usuarioAtual.planosAtivos=planos;
+alert('✅ Plano '+nome+' ativado!');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+/* ===== DEPOSITAR ===== */
+function renderDepositar(){
+var h='<h3 class="section-title">💰 Depositar</h3>';
+
+h+='<div class="notice">⚠️ Envie o comprovativo. O admin aprova em até 24h. Mínimo: '+formatKz(MIN_DEPOSITO)+'</div>';
+
+/* IBAN */
+h+='<div class="card">';
+h+='<div style="font-size:14px;font-weight:900;color:#0B3D2E;margin-bottom:12px">🏦 Transferência Bancária</div>';
+h+='<div class="pay-box"><div class="titulo">IBAN</div><div class="valor-grande valor-copiavel" onclick="copiar(\''+DADOS.iban+'\')">'+DADOS.iban+'</div><div class="copiar-hint">📋 Toque para copiar</div></div>';
+h+='<div class="pay-box"><div class="titulo">Titular</div><div class="valor-grande">'+DADOS.titular+'</div></div>';
+h+='</div>';
+
+/* PayPay */
+h+='<div class="card">';
+h+='<div style="font-size:14px;font-weight:900;color:#0B3D2E;margin-bottom:12px">💳 '+DADOS.paypayNome+'</div>';
+h+='<div class="pay-box"><div class="titulo">Entidade</div><div class="valor-grande valor-copiavel" onclick="copiar(\''+DADOS.paypayEntidade+'\')">'+DADOS.paypayEntidade+'</div><div class="copiar-hint">📋 Toque para copiar</div></div>';
+h+='<div class="pay-box"><div class="titulo">Referência</div><div class="valor-grande valor-copiavel" onclick="copiar(\''+DADOS.paypayReferencia+'\')">'+DADOS.paypayReferencia+'</div><div class="copiar-hint">📋 Toque para copiar</div></div>';
+h+='</div>';
+
+/* Unitel Money */
+h+='<div class="card">';
+h+='<div style="font-size:14px;font-weight:900;color:#0B3D2E;margin-bottom:12px">📱 '+DADOS.unitelNome+'</div>';
+h+='<div class="pay-box"><div class="titulo">Referência</div><div class="valor-grande valor-copiavel" onclick="copiar(\''+DADOS.unitelReferencia+'\')">'+DADOS.unitelReferencia+'</div><div class="copiar-hint">📋 Toque para copiar</div></div>';
+h+='</div>';
+
+/* Enviar comprovativo */
+h+='<div class="card">';
+h+='<div style="font-size:14px;font-weight:900;color:#0B3D2E;margin-bottom:12px">📤 Enviar Comprovativo</div>';
+h+='<div class="form-group"><label>Valor depositado (Kz)</label><input type="number" id="dep_valor" placeholder="Ex: 5000"></div>';
+h+='<div class="form-group"><label>Nº/Conta usada</label><input type="text" id="dep_conta" placeholder="Seu número"></div>';
+h+='<div class="form-group"><label>Comprovativo (imagem)</label>';
+h+='<div class="upload-area" onclick="document.getElementById(\'dep_file\').click()"><div class="ico">⬆️</div><p id="dep_file_nome">Toque para enviar imagem</p></div>';
+h+='<input type="file" id="dep_file" accept="image/*" style="display:none" onchange="mostrarFicheiro(this,\'dep_file_nome\')">';
+h+='</div>';
+h+='<button class="btn-principal" onclick="enviarDeposito()">Enviar para Análise</button>';
+h+='</div>';
+return h;
+}
+
+function mostrarFicheiro(input,id){
+if(input.files&&input.files[0]) document.getElementById(id).textContent='✅ '+input.files[0].name;
+}
+
+function enviarDeposito(){
+var u=usuarioAtual;
+var valor=parseFloat(document.getElementById('dep_valor').value);
+var conta=document.getElementById('dep_conta').value.trim();
+var file=document.getElementById('dep_file').files[0];
+
+if(isNaN(valor)||valor<MIN_DEPOSITO){alert('Valor mínimo: '+formatKz(MIN_DEPOSITO));return;}
+if(!conta){alert('Informe a conta usada.');return;}
+if(!file){alert('Envie o comprovativo.');return;}
+
+var reader=new FileReader();
+reader.onload=function(){
+var comp=reader.result;
+if(comp.length>900000){alert('Imagem muito grande. Use uma menor.');return;}
+db.collection('depositos').add({
+userId:u.uid,
+userNome:u.nome,
+userTelefone:u.telefone,
+valor:valor,
+conta:conta,
+comprovativo:comp,
+data:new Date().toLocaleString('pt-BR'),
+status:'pendente',
+timestamp:firebase.firestore.FieldValue.serverTimestamp()
+}).then(function(){
+alert('✅ Depósito enviado! Aguarde aprovação.');
+carregarTudo(function(){mudarTab('inicio');});
+});
+};
+reader.readAsDataURL(file);
+}
+
+/* ===== SACAR ===== */
+function renderSacar(){
+var u=usuarioAtual;
+var html='<h3 class="section-title">🏧 Sacar</h3>';
+html+='<div class="card card-gradient"><div style="font-size:12px;color:#B8C4BC;text-transform:uppercase;font-weight:700">Saldo disponível</div><div style="font-size:28px;font-weight:900;margin-top:6px">'+formatKz(u.saldo)+'</div></div>';
+
+html+='<div class="card">';
+html+='<div style="font-size:12px;color:#5A7568;margin-bottom:6px">Mínimo: <b style="color:#0B3D2E">'+formatKz(MIN_SAQUE)+'</b></div>';
+html+='<div style="font-size:12px;color:#5A7568;margin-bottom:6px">Taxa: <b style="color:#0B3D2E">'+(TAXA_SAQUE*100)+'%</b></div>';
+html+='<div style="font-size:12px;color:#2E7D32;font-weight:800;margin-top:8px">✅ Disponível a qualquer momento</div>';
+html+='</div>';
+
+html+='<div class="card">';
+html+='<div class="form-group"><label>Valor bruto (Kz)</label><input type="number" id="saq_valor" placeholder="Ex: 5000"></div>';
+html+='<div class="form-group"><label>Método de levantamento</label><select id="saq_metodo" onchange="mudarMetodoSaque()">';
+html+='<option value="referencia">Pagamento por Referência (telefone)</option>';
+html+='<option value="iban">Transferência Bancária (IBAN)</option>';
+html+='</select></div>';
+html+='<div id="saq_campo"></div>';
+html+='<button class="btn-principal" onclick="enviarSaque()">Solicitar Saque</button>';
+html+='</div>';
+setTimeout(mudarMetodoSaque,50);
+return html;
+}
+
+function mudarMetodoSaque(){
+var met=document.getElementById('saq_metodo');
+if(!met)return;
+var el=document.getElementById('saq_campo');
+if(met.value==='referencia'){
+el.innerHTML='<div class="form-group"><label>Nº de telefone</label><input type="tel" id="saq_conta" placeholder="9XX XXX XXX" inputmode="numeric"></div>';
+} else {
+el.innerHTML='<div class="form-group"><label>IBAN de destino</label><input type="text" id="saq_conta" placeholder="AO06..."></div>';
+}
+}
+
+function enviarSaque(){
+var u=usuarioAtual;
+var valor=parseFloat(document.getElementById('saq_valor').value);
+var metodo=document.getElementById('saq_metodo').value;
+var conta=document.getElementById('saq_conta').value.trim();
+
+if(isNaN(valor)||valor<MIN_SAQUE){alert('Valor mínimo: '+formatKz(MIN_SAQUE));return;}
+if(valor>u.saldo){alert('Saldo insuficiente.');return;}
+if(!conta){alert('Preencha a conta de destino.');return;}
+
+var taxa=valor*TAXA_SAQUE;
+var liquido=valor-taxa;
+var metNome=metodo==='referencia'?'Referência (telefone)':'IBAN';
+
+if(!confirm('Bruto: '+formatKz(valor)+'\nTaxa 7%: '+formatKz(taxa)+'\nLíquido: '+formatKz(liquido)+'\nMétodo: '+metNome+'\n\nConfirmar?'))return;
+
+var novoSaldo=u.saldo-valor;
+var novoSacado=(u.totalSacado||0)+valor;
+
+db.collection('usuarios').doc(u.uid).update({saldo:novoSaldo,totalSacado:novoSacado}).then(function(){
+return db.collection('saques').add({
+userId:u.uid,
+userNome:u.nome,
+userTelefone:u.telefone,
+valor:valor,
+taxa:taxa,
+liquido:liquido,
+metodo:metNome,
+conta:conta,
+data:new Date().toLocaleString('pt-BR'),
+status:'pendente',
+timestamp:firebase.firestore.FieldValue.serverTimestamp()
+});
+}).then(function(){
+usuarioAtual.saldo=novoSaldo;
+alert('✅ Saque solicitado! Aguarde aprovação.');
+carregarTudo(function(){mudarTab('inicio');});
+});
+}
+
+/* ===== EQUIPA ===== */
+function renderEquipa(){
+var u=usuarioAtual;
+var conv=usuarios.filter(function(x){return x.convidadoPor===u.codigoConvite;});
+
+var h='<h3 class="section-title">👥 Minha Equipa</h3>';
+h+='<div class="card card-gradient"><div style="font-size:12px;color:#B8C4BC;text-transform:uppercase;font-weight:700">Total de convidados</div><div style="font-size:28px;font-weight:900;margin-top:6px">'+conv.length+'</div></div>';
+
+h+='<div class="card">';
+h+='<div style="font-size:12px;color:#5A7568;margin-bottom:8px">🔗 Link único de convite:</div>';
+h+='<div style="background:#F0F5F2;padding:10px;border-radius:8px;font-size:11px;word-break:break-all;color:#0B3D2E;border:1px solid #D8E4DD">'+u.linkConvite+'</div>';
+h+='<button class="btn-full btn-verde" style="margin-top:10px" onclick="copiar(\''+u.linkConvite+'\')">📋 Copiar Link</button>';
+h+='<button class="btn-full btn-verde" style="margin-top:8px" onclick="partilharWA(\''+u.linkConvite+'\')">💬 Partilhar WhatsApp</button>';
+h+='</div>';
+
+h+='<div class="card">';
+h+='<div style="font-size:12px;color:#5A7568;margin-bottom:8px">🎁 Código de convite: <b style="color:#D4AF37;font-size:15px">'+u.codigoConvite+'</b></div>';
+h+='<div style="font-size:11px;color:#5A7568;line-height:1.5">Ganhe <b style="color:#0B3D2E">5%</b> de bónus quando o seu convidado investir.</div>';
+h+='</div>';
+
+if(conv.length>0){
+h+='<h3 class="section-title">Convidados ('+conv.length+')</h3>';
+conv.forEach(function(c){
+h+='<div class="card-mini">';
+h+='<div class="nome">'+c.nome+'</div>';
+h+='<div class="info">📱 '+c.telefone+' · '+c.dataRegisto+'</div>';
+h+='</div>';
+});
+}
+return h;
+}
+
+function partilharWA(link){
+var m='🚀 Junta-te a mim na AUREVANTS!\n\n💰 Ganha dinheiro investindo.\n📈 Retornos diários garantidos.\n\n🔗 Registe-se: '+link;
+window.open('https://wa.me/?text='+encodeURIComponent(m),'_blank');
+}
+
+/* ===== PERFIL ===== */
+function renderPerfil(){
+var u=usuarioAtual;
+var ini=u.nome.charAt(0).toUpperCase();
+
+var h='<div class="perfil-header">';
+h+='<div class="perfil-avatar">'+ini+'</div>';
+h+='<div class="perfil-nome">'+u.nome+'</div>';
+h+='<div class="perfil-codigo">'+u.codigoConvite+'</div>';
+h+='</div>';
+
+h+='<div class="card" style="padding:0">';
+h+='<div class="perfil-linha"><span class="lbl">Nome</span><span class="val">'+u.nome+'</span></div>';
+h+='<div class="perfil-linha"><span class="lbl">Telefone</span><span class="val">'+u.telefone+'</span></div>';
+h+='<div class="perfil-linha"><span class="lbl">Saldo</span><span class="val">'+formatKz(u.saldo)+'</span></div>';
+h+='<div class="perfil-linha"><span class="lbl">Total Depositado</span><span class="val">'+formatKz(u.totalDepositado||0)+'</span></div>';
+h+='<div class="perfil-linha"><span class="lbl">Total Sacado</span><span class="val">'+formatKz(u.totalSacado||0)+'</span></div>';
+h+='<div class="perfil-linha"><span class="lbl">Total de Bónus</span><span class="val">'+formatKz(u.totalBonus||0)+'</span></div>';
+h+='</div>';
+
+h+='<div style="margin-top:16px">';
+h+='<button class="btn-full btn-dourado-full" onclick="abrirAlterarSenha()">🔑 Alterar Senha</button>';
+h+='<button class="btn-full btn-verde" onclick="abrirSuporte()">💬 Falar com Suporte</button>';
+h+='<a href="'+WHATSAPP_GRUPO+'" target="_blank" style="text-decoration:none">';
+h+='<button class="btn-full btn-verde">👥 Entrar no Grupo WhatsApp</button></a>';
+h+='<button class="btn-full btn-vermelho" onclick="sair()">🚪 Terminar Sessão</button>';
+h+='</div>';
+return h;
+}
+
+function abrirAlterarSenha(){
+var atual=prompt('Digite a senha atual (6 dígitos):');
+if(!atual||atual.length!==6){alert('Senha inválida.');return;}
+var nova=prompt('Digite a nova senha (6 dígitos):');
+if(!nova||nova.length!==6){alert('Nova senha deve ter 6 dígitos.');return;}
+var conf=prompt('Confirme a nova senha:');
+if(nova!==conf){alert('As senhas não coincidem.');return;}
+
+var user=auth.currentUser;
+if(!user){alert('Sessão expirada.');return;}
+
+var cred=firebase.auth.EmailAuthProvider.credential(user.email,atual);
+user.reauthenticateWithCredential(cred).then(function(){
+return user.updatePassword(nova);
+}).then(function(){
+alert('✅ Senha alterada com sucesso!');
+}).catch(function(err){
+var m='Erro ao alterar senha.';
+if(err.code==='auth/wrong-password') m='Senha atual incorreta.';
+alert(m);
+});
+}/* ===== CONFIGURAÇÕES ADMIN ===== */
+function abrirConfigAdmin(){
+var grupo=prompt('Link do Grupo WhatsApp:',WHATSAPP_GRUPO);
+var sup1=prompt('Número Suporte 1 (WhatsApp):',SUPORTE_1);
+var sup2=prompt('Número Suporte 2 (WhatsApp):',SUPORTE_2);
+var taxa=prompt('Taxa de saque em %:',(TAXA_SAQUE*100).toString());
+var minSaq=prompt('Valor mínimo de saque (Kz):',MIN_SAQUE.toString());
+var minDep=prompt('Valor mínimo de depósito (Kz):',MIN_DEPOSITO.toString());
+var iban=prompt('IBAN de depósito:',DADOS.iban);
+var titular=prompt('Titular da conta:',DADOS.titular);
+var paypayEnt=prompt('PayPay Entidade:',DADOS.paypayEntidade);
+var paypayRef=prompt('PayPay Referência:',DADOS.paypayReferencia);
+var unitelRef=prompt('Unitel Money Referência:',DADOS.unitelReferencia);
+
+var dados={};
+if(grupo) dados.whatsappGrupo=grupo;
+if(sup1) dados.suporte1=sup1;
+if(sup2) dados.suporte2=sup2;
+if(taxa) dados.taxaSaque=parseFloat(taxa)/100;
+if(minSaq) dados.minSaque=parseFloat(minSaq);
+if(minDep) dados.minDeposito=parseFloat(minDep);
+if(iban) dados.iban=iban;
+if(titular) dados.titular=titular;
+if(paypayEnt) dados.paypayEntidade=paypayEnt;
+if(paypayRef) dados.paypayReferencia=paypayRef;
+if(unitelRef) dados.unitelReferencia=unitelRef;
+dados.atualizadoEm=new Date().toLocaleString('pt-BR');
+
+db.collection('config').doc('global').set(dados,{merge:true}).then(function(){
+/* Atualiza variáveis locais */
+if(grupo) WHATSAPP_GRUPO=grupo;
+if(sup1) SUPORTE_1=sup1;
+if(sup2) SUPORTE_2=sup2;
+if(taxa) TAXA_SAQUE=parseFloat(taxa)/100;
+if(minSaq) MIN_SAQUE=parseFloat(minSaq);
+if(minDep) MIN_DEPOSITO=parseFloat(minDep);
+if(iban) DADOS.iban=iban;
+if(titular) DADOS.titular=titular;
+if(paypayEnt) DADOS.paypayEntidade=paypayEnt;
+if(paypayRef) DADOS.paypayReferencia=paypayRef;
+if(unitelRef) DADOS.unitelReferencia=unitelRef;
+alert('✅ Configurações atualizadas!');
+carregarTudo(function(){mudarTab('inicio');});
+}).catch(function(){
+alert('❌ Erro ao guardar. Tente novamente.');
+});
+}
+
+/* ===== INICIALIZAÇÃO ===== */
+auth.onAuthStateChanged(function(user){
+if(user){
+db.collection('usuarios').doc(user.uid).get().then(function(doc){
+if(doc.exists){
+var d=doc.data();
+d.uid=doc.id;
+if(d.bloqueado){
+alert('Conta bloqueada. Contacte o suporte: '+SUPORTE_1);
+auth.signOut();
+return;
+}
+usuarioAtual=d;
+abrirApp();
+} else {
+mostrarTela('telaAuth');
+}
+}).catch(function(err){
+console.error(err);
+mostrarTela('telaAuth');
+});
+} else {
+mostrarTela('telaAuth');
+try {
+var p=new URLSearchParams(window.location.search);
+var ref=p.get('ref');
+if(ref){
+setTimeout(function(){
+var c=document.getElementById('r_code');
+if(c) c.value=ref.toUpperCase();
+},300);
+}
+} catch(e){}
+}
+});
+</script>
+</body>
+</html>
